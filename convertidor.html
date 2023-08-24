@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Convertir Excel a JSON</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      color: white; 
+      background-color: #343a40; 
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    input[type="file"] {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #fd7e14;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #083c4c;
+    }
+
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+      background-color: #f9f9f9;
+      color: black; /* Cambiamos el color del texto a negro */
+    }
+  </style>
+</head>
+<body>
+  <label for="inicioPeriodo">Inicio del periodo:</label>
+  <input type="text" id="inicioPeriodo" />
+  <br>
+  <label for="finPeriodo">Fin del periodo:</label>
+  <input type="text" id="finPeriodo" />
+  <br>
+  <label for="claveInstitucion">Clave de institución:</label>
+  <input type="text" id="claveInstitucion" />
+  <br>
+  <label for="reporte">Reporte:</label>
+  <input type="text" id="reporte" />
+  <br>
+  <input type="file" id="excel-file" />
+  <button onclick="mostrarInformacionPorReporte()">Convertir a JSON</button>
+  <button onclick="copyToJson()">Copiar JSON</button>
+  <button onclick="exportToJson()">Exportar JSON</button>
+  <div id="output"></div>
+
+  <script>
+    let jsonData = null;
+    let identificadorReporte = null;
+
+    function convertToJson() {
+      if (identificadorReporte && jsonData) {
+        const datosConEncabezado = {
+          identificadorReporte: identificadorReporte,
+          informacionFinanciera: jsonData
+        };
+
+        const jsonContent = JSON.stringify(datosConEncabezado, null, 2);
+        displayOutput(jsonContent);
+      } else {
+        alert('Primero convierte el archivo de Excel y captura los campos requeridos.');
+      }
+    }
+
+    function copyToJson() {
+      const outputDiv = document.getElementById('output');
+      const range = document.createRange();
+      range.selectNodeContents(outputDiv);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      document.execCommand('copy');
+      selection.removeAllRanges();
+      alert('JSON copiado al portapapeles. Pega el contenido en un archivo de texto para guardarlo como JSON.');
+    }
+
+    function displayOutput(content) {
+      const outputDiv = document.getElementById('output');
+      outputDiv.innerText = content;
+    }
+
+    function mostrarInformacionPorReporte() {
+      const inicioPeriodo = document.getElementById('inicioPeriodo').value;
+      const finPeriodo = document.getElementById('finPeriodo').value;
+      const claveInstitucion = document.getElementById('claveInstitucion').value;
+      const reporte = document.getElementById('reporte').value;
+
+      if (!inicioPeriodo || !finPeriodo || !claveInstitucion || !reporte) {
+        alert('Por favor, completa todos los campos requeridos.');
+        return;
+      }
+
+      identificadorReporte = {
+        inicioPeriodo: inicioPeriodo,
+        finPeriodo: finPeriodo,
+        claveInstitucion: claveInstitucion,
+        reporte: reporte
+      };
+
+      const fileInput = document.getElementById('excel-file');
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        const data = event.target.result;
+        const workbook = XLSX.read(data, { type: 'binary' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+        convertToJson();
+      };
+
+      reader.readAsBinaryString(file);
+    }
+
+    function exportToJson() {
+      if (identificadorReporte && jsonData) {
+        const datosConEncabezado = {
+          identificadorReporte: identificadorReporte,
+          informacionFinanciera: jsonData
+        };
+
+        const jsonContent = JSON.stringify(datosConEncabezado, null, 2);
+        const blob = new Blob([jsonContent], { type: 'application/json' });
+
+        const fileInput = document.getElementById('excel-file');
+        const fileName = fileInput.files[0].name.replace(/\.[^/.]+$/, ""); // Obtenemos el nombre del archivo sin la extensión
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${fileName}.json`; // Usamos el nombre del archivo Excel con extensión .json
+        a.click();
+        URL.revokeObjectURL(url);
+      } else {
+        alert('Primero convierte el archivo de Excel y captura los campos requeridos.');
+      }
+    }
+  </script>
+</body>
+</html>

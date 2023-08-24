@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Página de Navegación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #343a40;
+            color: white;
+        }
+
+        #header {
+            padding: 0px;
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #fd7e14;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background-color: #083c4c;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="Logo" style="max-width: 100%;">
+    </div>
+    
+    <div id="buttons">
+        <button onclick="mostrarCalculadora()">Calculadora de Fechas</button>
+        <button onclick="mostrarConvertidor()">Convertir Excel a JSON</button>
+    </div>
+    
+    <div id="content">
+       
+    </div>
+    
+    <script>
+        function mostrarCalculadora() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+                <iframe src="simulador.html" style="width: 100%; height: 800px; border: none;"></iframe>
+            `;
+        }
+
+        function mostrarConvertidor() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `
+                <iframe src="convertidor.html" style="width: 100%; height: 800px; border: none;"></iframe>
+            `;
+        }
+    </script>
+</body>
+</html>
