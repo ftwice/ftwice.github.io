@@ -9,33 +9,61 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        
-        .container {
-            text-align: center;
-        }
-        
-        .card {
-            max-width: 140%;
-            max-height: 350px;
-        }
-        
-        .card-body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .custom-img {
-            max-width: 100%;
-            max-height: 200px;
-            object-fit: contain;
-        }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 300px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.custom-img {
+    max-width: 100%;
+    height: auto;
+}
+
+#carrito {
+    list-style: none;
+    padding: 0;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.btn-danger {
+    background-color: #ff5555;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #ff3333;
+}
+
+#total {
+    font-weight: bold;
+}
+
+#boton-vaciar {
+    margin-top: 10px;
+}
+
     </style>
     <script>
       
@@ -251,6 +279,7 @@
       </script>
 </head>
 <body>
+    
     <div class="container">
         <h1>Productos</h1>
         <div class="row">
