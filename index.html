@@ -47,7 +47,6 @@
     <div id="buttons">
         <button onclick="mostrarCalculadora()">Calculadora de Fechas</button>
         <button onclick="mostrarConvertidor()">Convertir Excel a JSON</button>
-	<button onclick="mostrarTienda()">Tienda</button>
     </div>
     
     <div id="content">
@@ -69,12 +68,6 @@
             `;
         }
 
-        function mostrarTienda() {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = `
-                <iframe src="tienda.html" style="width: 100%; height: 800px; border: none;"></iframe>
-            `;
-        }
 
     </script>
 </body>
