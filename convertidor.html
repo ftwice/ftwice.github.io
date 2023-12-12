@@ -113,11 +113,11 @@
         const blob = new Blob([jsonContent], { type: 'application/json' });
 
         const fileInput = document.getElementById('excel-file');
-        const fileName = fileInput.files[0].name.replace(/\.[^/.]+$/, ""); // Obtenemos el nombre del archivo sin la extensión
+        const fileName = fileInput.files[0].name.replace(/\.[^/.]+$/, ""); 
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${fileName}.json`; // Usamos el nombre del archivo Excel con extensión .json
+        a.download = `${fileName}.json`; 
         a.click();
         URL.revokeObjectURL(url);
       } else {

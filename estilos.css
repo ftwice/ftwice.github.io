@@ -22,14 +22,14 @@ button {
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Añadida la propiedad transform */
-    margin: 10px 0; /* Ajustado el margen superior e inferior para separar los botones */
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    margin: 10px 0; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
     background-color: #fd7e14;
-    transform: scale(1.1); /* Zoom del 10% al pasar el mouse */
+    transform: scale(1.1); 
 }
 
 input[type="text"] {
