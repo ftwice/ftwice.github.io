@@ -5,37 +5,52 @@
     <title>Luis Fernández</title>
     <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #343a40;
-            color: white;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #343a40;
+        color: white;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        #header {
-            padding: 0px;
-        }
+    #header {
+        padding: 20px;
+        background-color: #1a1e26;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        #buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 0px;
-        }
+    #buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #fd7e14;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin: 0 10px;
-        }
+    button {
+        padding: 15px 30px;
+        font-size: 16px;
+        background-color: #fd7e14;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin: 0 10px;
+        border-radius: 25px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-        button:hover {
-            background-color: #083c4c;
-        }
-    </style>
+    button:hover {
+        background-color: #083c4c;
+        transform: scale(1.1);
+    }
+
+    button:active {
+        transform: scale(0.9);
+    }
+</style>
+
 </head>
 <body>
     <div id="header">
