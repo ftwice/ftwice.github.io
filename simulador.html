@@ -3,43 +3,62 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Simulador</title>
-    <style>
+ <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #343a40;
+            background-color: #1a1e26; /* Cambiado a #1a1e26 para mantener el color oscuro */
             background-size: 150px;
             background-repeat: no-repeat;
             padding-top: 20px;
-            color: #fff;
+            color: white;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
         table {
             border-collapse: collapse;
             margin: 0 auto;
+            color: white;
         }
-        
+
         th, td {
             padding: 10px;
             border: 1px solid #ccc;
         }
-        
+
         th {
             background-color: #f2f2f2;
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
         }
 
         button {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #fd7e14;
-            color: #fff;
+            color: white;
             border: none;
             cursor: pointer;
+            margin: 0 10px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
-            background-color: ##083c4c;
-            color: #083c4c;
+            background-color: #083c4c;
+            transform: scale(1.1);
+        }
+
+        button:active {
+            transform: scale(0.9);
         }
     </style>
     <script>
