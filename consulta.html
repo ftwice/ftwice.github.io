@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="estilos.css"> 
+    <title>Noviembre</title>
+    
+</head>
+<body>
+    <h1></h1>
+
+    <label for="valor"></label>
+    <input type="text" id="valor" placeholder="">
+    <button onclick="redirigir()">Generar Estado de Cuenta</button>
+
+    <script>
+        function redirigir() {
+            
+            var valorClabe = document.getElementById("valor").value;
+            
+            var enlace = "https://rp-app-01.azurewebsites.net/api/Reporte/GetEstadoCuenta?cuenta=" + valorClabe + "&anio=2023&mes=11";
+
+	    var ultimos6 = valorClabe.toString().substr(-6);
+            
+            window.open(enlace, '_blank');
+
+	   navigator.clipboard.writeText(ultimos6);
+        }
+    </script>
+</body>
+</html>
