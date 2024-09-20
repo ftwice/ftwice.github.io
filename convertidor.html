@@ -30,7 +30,6 @@
   <button onclick="exportToJson()" style="font-size: 14px;">Exportar JSON</button>
   
   <div id="output" style="font-size: 14px;"></div>
-</body>
 
   <script>
     let jsonData = null;
@@ -64,7 +63,10 @@
 
     function displayOutput(content) {
       const outputDiv = document.getElementById('output');
-      outputDiv.innerText = content;
+      const pre = document.createElement('pre');
+      pre.textContent = content;
+      outputDiv.innerHTML = '';
+      outputDiv.appendChild(pre);
     }
 
     function mostrarInformacionPorReporte() {
@@ -117,7 +119,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = ${fileName}.json; 
+        a.download = `${fileName}.json`; 
         a.click();
         URL.revokeObjectURL(url);
       } else {
