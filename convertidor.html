@@ -29,8 +29,8 @@
   <button onclick="copyToJson()" style="font-size: 14px;">Copiar JSON</button>
   <button onclick="exportToJson()" style="font-size: 14px;">Exportar JSON</button>
   
+  <!-- Aquí está el contenedor centrado con texto justificado a la izquierda -->
   <div id="output" style="font-size: 14px; width: 80%; margin: 0 auto; text-align: left;"></div>
-</body>
 
   <script>
     let jsonData = null;
@@ -64,7 +64,10 @@
 
     function displayOutput(content) {
       const outputDiv = document.getElementById('output');
-      outputDiv.innerText = content;
+      const pre = document.createElement('pre');
+      pre.textContent = content;
+      outputDiv.innerHTML = '';
+      outputDiv.appendChild(pre);
     }
 
     function mostrarInformacionPorReporte() {
