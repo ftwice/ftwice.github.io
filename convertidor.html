@@ -38,14 +38,6 @@
 
     function convertToJson() {
       if (identificadorReporte && jsonData) {
-        // Asegurarse de que el campo 'moneda' esté entre comillas
-        jsonData = jsonData.map((registro) => {
-          if (registro.moneda) {
-            registro.moneda = `"${registro.moneda}"`; // Asegurarse que 'moneda' esté entre comillas
-          }
-          return registro;
-        });
-
         const datosConEncabezado = {
           identificadorReporte: identificadorReporte,
           informacionFinanciera: jsonData
@@ -125,7 +117,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${fileName}.json`; 
+        a.download = ${fileName}.json; 
         a.click();
         URL.revokeObjectURL(url);
       } else {
