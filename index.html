@@ -40,16 +40,35 @@
     text-transform: lowercase; /* convierte el texto a minúsculas */
   }
 
-  input[type="file"] {
-    margin-bottom: 20px;
-    background-color: #2c2c2c; /* fondo gris oscuro */
-    padding: 10px;
-    color: #f0f0f0;
-    border: 1px solid #444; /* bordes grises para inputs */
+  .file-input {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .file-input input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    font-size: 100px;
+    cursor: pointer;
+  }
+
+  .file-label {
+    padding: 10px 20px;
+    background-color: #3e3e3e; /* botones gris medio */
+    color: white;
+    border: none;
     border-radius: 5px;
-    width: 100%; /* ajusta el campo al 100% del contenedor */
-    max-width: 260px; /* límite de ancho en pantallas grandes */
+    cursor: pointer;
     text-transform: lowercase; /* convierte el texto a minúsculas */
+    transition: background-color 0.3s ease; /* transición suave en hover */
+    margin-right: 10px;
+  }
+
+  .file-label:hover {
+    background-color: #5c5c5c; /* botón más claro en hover */
   }
 
   button {
@@ -84,6 +103,12 @@
   .json-label {
     text-transform: uppercase; /* convierte JSON a mayúsculas */
   }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
 </style>
 </head>
 <body>
@@ -108,14 +133,16 @@
     </div>
   </div>
 
-  <!-- botón para elegir archivo -->
-  <input type="file" id="excel-file" />
-  <br>
-
-  <!-- botones para acciones -->
-  <button onclick="mostrarInformacionPorReporte()">convertir a JSON</button>
-  <button onclick="copyToJson()">copiar JSON</button>
-  <button onclick="exportToJson()">exportar JSON</button>
+  <!-- contenedor de botones -->
+  <div class="button-container">
+    <div class="file-input">
+      <button id="file-button" class="file-label">elegir archivo (0)</button>
+      <input type="file" id="excel-file" onchange="updateFileButtonLabel()" />
+    </div>
+    <button onclick="mostrarInformacionPorReporte()">convertir a JSON</button>
+    <button onclick="copyToJson()">copiar JSON</button>
+    <button onclick="exportToJson()">exportar JSON</button>
+  </div>
 
   <!-- área de salida (output) -->
   <div id="output"></div>
@@ -162,7 +189,7 @@
     const reporte = document.getElementById('reporte').value;
 
     if (!inicioPeriodo || !finPeriodo || !claveInstitucion || !reporte) {
-      alert('por favor, completa todos los campos requeridos.');
+      alert('completa todos los campos.');
       return;
     }
 
@@ -210,6 +237,16 @@
       URL.revokeObjectURL(url);
     } else {
       alert('primero convierte el archivo de excel y captura los campos requeridos.');
+    }
+  }
+
+  function updateFileButtonLabel() {
+    const fileInput = document.getElementById('excel-file');
+    const fileButton = document.getElementById('file-button');
+    if (fileInput.files.length > 0) {
+      fileButton.textContent = 'elegir archivo (1)';
+    } else {
+      fileButton.textContent = 'elegir archivo (0)';
     }
   }
 </script>
