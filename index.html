@@ -175,7 +175,7 @@
     selection.addRange(range);
     document.execCommand('copy');
     selection.removeAllRanges();
-    alert('JSON copiado al portapapeles. pega el contenido en un archivo de texto para guardarlo como JSON.');
+    alert('JSON copiado al portapapeles.');
   }
 
   function displayOutput(content) {
@@ -190,7 +190,7 @@
     const reporte = document.getElementById('reporte').value;
 
     if (!inicioPeriodo || !finPeriodo || !claveInstitucion || !reporte) {
-      alert('por favor, completa todos los campos requeridos.');
+      alert('completa todos los campos requeridos.');
       return;
     }
 
