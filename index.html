@@ -14,11 +14,6 @@
     text-align: center; /* centra el contenido */
   }
 
-  img {
-    max-width: 400px; /* ajusta el tamaño del logo */
-    margin-bottom: 20px; /* espacio debajo del logo */
-  }
-
   .form-container {
     display: flex;
     justify-content: space-between;
@@ -82,7 +77,7 @@
     white-space: pre-wrap;
     border-radius: 5px;
     text-align: left; /* output alineado a la izquierda */
-    font-family: 'Courier New', Courier, monospace; /* cambia a fuente tipo terminal */
+    font-family: 'Consolas', Courier, monospace; /* cambia a fuente tipo terminal */
     font-size: 14px; /* ajusta el tamaño de fuente si es necesario */
   }
 
@@ -92,9 +87,6 @@
 </style>
 </head>
 <body>
-
-  <!-- logo en la parte superior -->
-  <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="logo">
 
   <!-- contenedor de los 4 campos -->
   <div class="form-container">
@@ -126,7 +118,7 @@
   <button onclick="exportToJson()">exportar JSON</button>
 
   <!-- área de salida (output) -->
-  <div id="output">output</div>
+  <div id="output"></div>
 
 <script>
   let jsonData = null;
@@ -155,7 +147,7 @@
     selection.addRange(range);
     document.execCommand('copy');
     selection.removeAllRanges();
-    alert('JSON copiado al portapapeles. pega el contenido en un archivo de texto para guardarlo como JSON.');
+    alert('JSON copiado al portapapeles.');
   }
 
   function displayOutput(content) {
