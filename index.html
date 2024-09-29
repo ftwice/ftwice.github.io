@@ -9,17 +9,14 @@
 </head>
 <body>
   <div id="content">
+    <!-- Logo -->
     <div id="header">
       <a href="https://www.rhinopay.com">
         <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="Logo">
       </a>
     </div>
 
-    <div class="buttons-container">
-      <button>Calculadora de Fechas</button>
-      <button>Convertir Excel a JSON</button>
-    </div>
-
+    <!-- Campos de entrada -->
     <label for="inicioPeriodo">Inicio del periodo:</label>
     <input type="text" id="inicioPeriodo" />
 
@@ -32,14 +29,15 @@
     <label for="reporte">Reporte:</label>
     <input type="text" id="reporte" />
 
-    <input type="file" id="excel-file" />
-
+    <!-- Botones -->
     <div class="buttons-container">
       <button onclick="mostrarInformacionPorReporte()">Convertir a JSON</button>
       <button onclick="copyToJson()">Copiar JSON</button>
       <button onclick="exportToJson()">Exportar JSON</button>
+      <button>Otro Botón</button>
     </div>
 
+    <!-- Salida (output) -->
     <div id="output">Aquí se mostrará el JSON...</div>
   </div>
 </body>
