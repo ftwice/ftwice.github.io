@@ -9,9 +9,9 @@
   body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    color: white; 
-    background-color: #1c1c1c; /* fondo oscuro */
-    text-align: center; /* para centrar el contenido */
+    color: #f0f0f0; /* texto en gris muy claro para mejor contraste */
+    background-color: #1b1b1b; /* fondo ligeramente más claro */
+    text-align: center; /* centra el contenido */
   }
 
   img {
@@ -31,15 +31,15 @@
   }
 
   label {
-    color: #ccc; /* gris claro */
+    color: #bbbbbb; /* gris más claro para mejor legibilidad */
     text-transform: lowercase; /* convierte el texto a minúsculas */
   }
 
   input {
     padding: 10px;
-    background-color: #3a3a3a; /* fondo gris oscuro */
-    color: white;
-    border: none;
+    background-color: #2c2c2c; /* gris más claro que el fondo del body */
+    color: #f0f0f0; /* texto gris claro */
+    border: 1px solid #444; /* bordes grises para distinguir los inputs */
     border-radius: 5px;
     width: 180px;
     text-transform: lowercase; /* convierte el texto a minúsculas */
@@ -47,10 +47,10 @@
 
   input[type="file"] {
     margin-bottom: 20px;
-    background-color: #3a3a3a; /* fondo gris oscuro */
+    background-color: #2c2c2c; /* fondo gris oscuro */
     padding: 10px;
-    color: white;
-    border: none;
+    color: #f0f0f0;
+    border: 1px solid #444; /* bordes grises para inputs */
     border-radius: 5px;
     width: 100%; /* ajusta el campo al 100% del contenedor */
     max-width: 260px; /* límite de ancho en pantallas grandes */
@@ -59,34 +59,36 @@
 
   button {
     padding: 10px 20px;
-    background-color: #444; /* botones gris oscuro */
+    background-color: #3e3e3e; /* botones gris medio */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
     text-transform: lowercase; /* convierte el texto a minúsculas */
+    transition: background-color 0.3s ease; /* transición suave en hover */
   }
 
   button:hover {
-    background-color: #555; /* botón un poco más claro en hover */
+    background-color: #5c5c5c; /* botón más claro en hover */
   }
 
   #output {
     margin-top: 20px;
     padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #2a2a2a; /* fondo del output gris oscuro */
-    color: white;
+    border: 1px solid #666; /* borde gris medio */
+    background-color: #2c2c2c; /* fondo gris oscuro */
+    color: #f0f0f0;
     white-space: pre-wrap;
     border-radius: 5px;
     text-align: left; /* output alineado a la izquierda */
+    font-family: 'Courier New', Courier, monospace; /* cambia a fuente tipo terminal */
+    font-size: 14px; /* ajusta el tamaño de fuente si es necesario */
   }
 
   .json-label {
     text-transform: uppercase; /* convierte JSON a mayúsculas */
   }
-
 </style>
 </head>
 <body>
