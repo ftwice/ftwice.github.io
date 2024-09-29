@@ -1,5 +1,5 @@
 body {
-  background-color: #1c1c1c; /* Puedes cambiar el color de fondo si lo deseas */
+  background-color: #1c1c1c;
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
@@ -13,13 +13,12 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 450px; /* Ajustado para que el diseño tenga espacio */
+  width: 450px;
   text-align: center;
 }
 
 img {
   max-width: 100%;
-  border-radius: 5px;
   margin-bottom: 20px;
 }
 
@@ -27,23 +26,19 @@ label {
   color: #ccc;
   font-size: 14px;
   display: block;
-  text-align: left; /* Alinea las etiquetas a la izquierda */
+  text-align: left;
   margin: 10px 0 5px;
 }
 
-input, textarea {
-  width: calc(100% - 10px); /* Permite que los campos se ajusten al 100% */
+input {
+  width: calc(100% - 10px);
   padding: 10px;
   margin-bottom: 15px;
   border: none;
   border-radius: 5px;
-  background-color: #fff; /* Color de fondo de los campos */
-  color: #000; /* Color de texto de los campos */
+  background-color: #fff;
+  color: #000;
   font-size: 14px;
-}
-
-input::placeholder, textarea::placeholder {
-  color: #777;
 }
 
 button {
@@ -58,11 +53,8 @@ button {
 .buttons-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* Para que los botones puedan hacer saltos si es necesario */
   margin-bottom: 15px;
-}
-
-.buttons-container button {
-  margin: 0 5px; /* Añade un poco de espacio entre los botones */
 }
 
 #output {
