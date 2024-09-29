@@ -11,71 +11,53 @@ body {
     background-color: #1a1a1a; /* fondo oscuro */
     color: #e0e0e0; /* color de texto claro */
     display: flex;
-    justify-content: center; /* centrar horizontalmente */
-    align-items: center; /* centrar verticalmente */
-    height: 100vh; /* altura completa de la pantalla */
+    flex-direction: column;
+    align-items: center; /* centrar horizontalmente */
+    justify-content: flex-start; /* ajustar la alineación vertical */
+    min-height: 100vh; /* altura mínima de la pantalla */
 }
 
-/* estilo para el contenedor principal */
-.container {
-    max-width: 600px; /* ancho máximo del contenedor */
-    width: 100%; /* ocupa el 100% del ancho disponible */
+/* estilo para el contenedor del header */
+#header {
+    width: 100%; /* ocupa el ancho completo */
+    background-color: #2b2b2b; /* fondo oscuro */
     padding: 20px; /* espaciado interno */
-    background-color: #2b2b2b; /* fondo oscuro para el contenedor */
+    text-align: center; /* centrar el logo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra para el header */
+    border-bottom: 2px solid #444; /* borde inferior */
+}
+
+/* estilos para el contenido */
+#content {
+    width: 100%; /* el contenido ocupa el ancho completo */
+    padding: 20px;
+    background-color: #3c3c3c; /* fondo oscuro para el contenido */
     border-radius: 8px; /* bordes redondeados */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra para el contenedor */
-    text-align: center; /* centrar el texto dentro del contenedor */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra */
+    flex-grow: 1; /* permite que el contenido crezca según el espacio disponible */
+    margin-top: 20px; /* margen superior */
 }
 
-/* estilos para los campos de entrada, área de texto y botón */
-input, textarea, button {
-    width: 100%; /* los campos ocupan todo el ancho disponible */
-    max-width: 500px; /* ancho máximo para los campos */
-    padding: 10px; /* espaciado interno */
-    margin: 10px 0; /* separación entre los campos */
-    background-color: #3c3c3c; /* fondo oscuro */
-    border: 1px solid #444; /* bordes oscuros */
-    border-radius: 4px; /* bordes redondeados */
-    color: #fff; /* texto en color blanco */
-    text-align: center; /* texto centrado */
-}
-
-/* estilo para el texto del placeholder en minúsculas y los botones */
-input::placeholder, button {
-    text-transform: lowercase; /* convertir todo el texto a minúsculas */
-}
-
-/* estilo para el botón */
-button {
-    cursor: pointer; /* cambiar el cursor a "puntero" cuando está sobre el botón */
-    transition: background-color 0.3s; /* transición suave del color de fondo */
-}
-
-/* cambiar el color de fondo del botón cuando se pasa el cursor por encima */
-button:hover {
-    background-color: #555;
-}
-
-/* estilo para el contenedor de respuesta */
-.response {
-    margin-top: 20px; /* separación superior */
-    background-color: #3c3c3c; /* fondo oscuro para la respuesta */
-    padding: 15px; /* espaciado interno */
-    border-radius: 4px; /* bordes redondeados */
-    text-align: left; /* alinear el texto de la respuesta a la izquierda */
-}
-
-/* estilo para los mensajes de error */
-.error {
-    color: #ff4d4d; /* texto rojo para los errores */
+/* estilos para el iframe */
+iframe {
+    width: 100%; /* el iframe ocupa el 100% del ancho */
+    height: 800px; /* altura fija */
+    border: none; /* sin bordes */
+    border-radius: 8px; /* bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* sombra */
 }
 
 /* estilos responsive para pantallas más pequeñas */
 @media (max-width: 600px) {
-    .container {
-        padding: 15px; /* reducir el espaciado en pantallas pequeñas */
+    #header {
+        padding: 10px; /* reducir el espaciado en pantallas pequeñas */
     }
-    input, textarea, button {
-        font-size: 14px; /* reducir el tamaño de la fuente en pantallas pequeñas */
+    
+    #content {
+        padding: 15px;
+    }
+    
+    iframe {
+        height: 600px; /* altura más pequeña en pantallas pequeñas */
     }
 }
