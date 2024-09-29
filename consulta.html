@@ -2,7 +2,7 @@
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-   <title>Excel a JSON</title>
+   <title>Luis Fernández</title>
    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
    <link rel="stylesheet" href="estilos.css">
 </head>
@@ -13,8 +13,27 @@
       </a>
    </div>
 
-   <div id="content">
-      <iframe src="convertidor.html" style="width: 100%; height: 800px; border: none;"></iframe>
+   <div id="buttons">
+      <button onclick="mostrarConvertidor()">Convertir Excel a JSON</button>
    </div>
+
+   <div id="content">
+      <!-- El contenido de Convertir Excel a JSON se cargará al inicio -->
+   </div>
+
+   <script>
+      // Función para mostrar el convertidor de Excel a JSON
+      function mostrarConvertidor() {
+         const contentDiv = document.getElementById('content');
+         contentDiv.innerHTML = `
+            <iframe src="convertidor.html" style="width: 100%; height: 800px; border: none;"></iframe>
+         `;
+      }
+
+      // Cargar el convertidor de Excel a JSON al iniciar la página
+      window.onload = function() {
+         mostrarConvertidor();
+      };
+   </script>
 </body>
 </html>
