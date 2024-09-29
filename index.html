@@ -16,18 +16,19 @@
 
   .form-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 20px;
   }
 
-  .form-container label, 
-  .form-container input {
-    margin-right: 10px;
+  .form-item {
+    margin: 0 20px; /* añade espacio entre los campos */
   }
 
   label {
     color: #bbbbbb; /* gris más claro para mejor legibilidad */
     text-transform: lowercase; /* convierte el texto a minúsculas */
+    display: block; /* para que las etiquetas queden encima de los inputs */
+    margin-bottom: 5px; /* espacio entre el label y el input */
   }
 
   input {
@@ -115,19 +116,19 @@
 
   <!-- contenedor de los 4 campos -->
   <div class="form-container">
-    <div>
+    <div class="form-item">
       <label for="inicioPeriodo">inicio del periodo:</label>
       <input type="text" id="inicioPeriodo" />
     </div>
-    <div>
+    <div class="form-item">
       <label for="finPeriodo">fin del periodo:</label>
       <input type="text" id="finPeriodo" />
     </div>
-    <div>
+    <div class="form-item">
       <label for="claveInstitucion">clave de institución:</label>
       <input type="text" id="claveInstitucion" />
     </div>
-    <div>
+    <div class="form-item">
       <label for="reporte">reporte:</label>
       <input type="text" id="reporte" />
     </div>
@@ -174,7 +175,7 @@
     selection.addRange(range);
     document.execCommand('copy');
     selection.removeAllRanges();
-    alert('JSON copiado al portapapeles.');
+    alert('JSON copiado al portapapeles. pega el contenido en un archivo de texto para guardarlo como JSON.');
   }
 
   function displayOutput(content) {
@@ -189,7 +190,7 @@
     const reporte = document.getElementById('reporte').value;
 
     if (!inicioPeriodo || !finPeriodo || !claveInstitucion || !reporte) {
-      alert('completa todos los campos.');
+      alert('por favor, completa todos los campos requeridos.');
       return;
     }
 
