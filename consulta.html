@@ -2,38 +2,20 @@
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-   <title>Luis Fernández</title>
+   <title>Excel a JSON</title>
    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-   <div id="header">
+   <div id="encabezado">
       <a href="https://www.rhinopay.com">
-         <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="Logo" style="max-width: 100%;">
+         <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="logo" style="max-width: 100%;">
       </a>
    </div>
 
-   <div id="buttons">
-      <button onclick="mostrarConvertidor()">Convertir Excel a JSON</button>
+   <div id="contenido">
+      <!-- se carga el convertidor de excel a json directamente -->
+      <iframe src="convertidor.html" style="width: 100%; height: 800px; border: none;"></iframe>
    </div>
-
-   <div id="content">
-      <!-- El contenido de Convertir Excel a JSON se cargará al inicio -->
-   </div>
-
-   <script>
-      // Función para mostrar el convertidor de Excel a JSON
-      function mostrarConvertidor() {
-         const contentDiv = document.getElementById('content');
-         contentDiv.innerHTML = `
-            <iframe src="convertidor.html" style="width: 100%; height: 800px; border: none;"></iframe>
-         `;
-      }
-
-      // Cargar el convertidor de Excel a JSON al iniciar la página
-      window.onload = function() {
-         mostrarConvertidor();
-      };
-   </script>
 </body>
 </html>
