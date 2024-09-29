@@ -1,140 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-   <title>Convertir Excel a JSON</title>
-   <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
-   <link rel="stylesheet" href="estilos.css">  
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convertir Excel a JSON</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body>
-   <div id="header">
+  <div id="content">
+    <div id="header">
       <a href="https://www.rhinopay.com">
-         <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="Logo" style="max-width: 100%;">
+        <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="Logo">
       </a>
-   </div>
+    </div>
 
-   <div id="content">
-      <br>
-      <label for="inicioPeriodo">Inicio:</label>
-      <input type="text" id="inicioPeriodo" style="width: 120px; font-size: 14px;" />
-      
-      <label for="finPeriodo">Fin:</label>
-      <input type="text" id="finPeriodo" style="width: 120px; font-size: 14px;" />
-      
-      <label for="claveInstitucion">Clave:</label>
-      <input type="text" id="claveInstitucion" style="width: 120px; font-size: 14px;" />
-      
-      <label for="reporte">Reporte:</label>
-      <input type="text" id="reporte" style="width: 120px; font-size: 14px;" />
+    <div class="buttons-container">
+      <button>Calculadora de Fechas</button>
+      <button>Convertir Excel a JSON</button>
+    </div>
 
-      <br>
-      
-      <input type="file" id="excel-file" style="font-size: 14px;" />
-      
-      <button onclick="mostrarInformacionPorReporte()" style="font-size: 14px;">Convertir a JSON</button>
-      <button onclick="copyToJson()" style="font-size: 14px;">Copiar JSON</button>
-      <button onclick="exportToJson()" style="font-size: 14px;">Exportar JSON</button>
-      
-      <!-- Contenedor y texto alineados a la izquierda -->
-      <div id="output" style="font-size: 14px; text-align: left;"></div>
+    <label for="inicioPeriodo">Inicio del periodo:</label>
+    <input type="text" id="inicioPeriodo" />
 
-      <script>
-         let jsonData = null;
-         let identificadorReporte = null;
+    <label for="finPeriodo">Fin del periodo:</label>
+    <input type="text" id="finPeriodo" />
 
-         function convertToJson() {
-            if (identificadorReporte && jsonData) {
-               const datosConEncabezado = {
-                  identificadorReporte: identificadorReporte,
-                  informacionFinanciera: jsonData
-               };
+    <label for="claveInstitucion">Clave de institución:</label>
+    <input type="text" id="claveInstitucion" />
 
-               const jsonContent = JSON.stringify(datosConEncabezado, null, 2);
-               displayOutput(jsonContent);
-            } else {
-               alert('Primero convierte el archivo de Excel y captura los campos requeridos.');
-            }
-         }
+    <label for="reporte">Reporte:</label>
+    <input type="text" id="reporte" />
 
-         function copyToJson() {
-            const outputDiv = document.getElementById('output');
-            const range = document.createRange();
-            range.selectNodeContents(outputDiv);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            document.execCommand('copy');
-            selection.removeAllRanges();
-            alert('JSON copiado al portapapeles. Pega el contenido en un archivo de texto para guardarlo como JSON.');
-         }
+    <input type="file" id="excel-file" />
 
-         function displayOutput(content) {
-            const outputDiv = document.getElementById('output');
-            const pre = document.createElement('pre');
-            pre.textContent = content;
-            outputDiv.innerHTML = '';
-            outputDiv.appendChild(pre);
-         }
+    <div class="buttons-container">
+      <button onclick="mostrarInformacionPorReporte()">Convertir a JSON</button>
+      <button onclick="copyToJson()">Copiar JSON</button>
+      <button onclick="exportToJson()">Exportar JSON</button>
+    </div>
 
-         function mostrarInformacionPorReporte() {
-            const inicioPeriodo = document.getElementById('inicioPeriodo').value;
-            const finPeriodo = document.getElementById('finPeriodo').value;
-            const claveInstitucion = document.getElementById('claveInstitucion').value;
-            const reporte = document.getElementById('reporte').value;
-
-            if (!inicioPeriodo || !finPeriodo || !claveInstitucion || !reporte) {
-               alert('Por favor, completa todos los campos requeridos.');
-               return;
-            }
-
-            identificadorReporte = {
-               inicioPeriodo: inicioPeriodo,
-               finPeriodo: finPeriodo,
-               claveInstitucion: claveInstitucion,
-               reporte: reporte
-            };
-
-            const fileInput = document.getElementById('excel-file');
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function (event) {
-               const data = event.target.result;
-               const workbook = XLSX.read(data, { type: 'binary' });
-               const sheetName = workbook.SheetNames[0];
-               const worksheet = workbook.Sheets[sheetName];
-               jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-               convertToJson();
-            };
-
-            reader.readAsBinaryString(file);
-         }
-
-         function exportToJson() {
-            if (identificadorReporte && jsonData) {
-               const datosConEncabezado = {
-                  identificadorReporte: identificadorReporte,
-                  informacionFinanciera: jsonData
-               };
-
-               const jsonContent = JSON.stringify(datosConEncabezado, null, 2);
-               const blob = new Blob([jsonContent], { type: 'application/json' });
-
-               const fileInput = document.getElementById('excel-file');
-               const fileName = fileInput.files[0].name.replace(/\.[^/.]+$/, "");
-               const url = URL.createObjectURL(blob);
-               const a = document.createElement('a');
-               a.href = url;
-               a.download = `${fileName}.json`;
-               a.click();
-               URL.revokeObjectURL(url);
-            } else {
-               alert('Primero convierte el archivo de Excel y captura los campos requeridos.');
-            }
-         }
-      </script>
-   </div>
+    <div id="output">Aquí se mostrará el JSON...</div>
+  </div>
 </body>
 </html>
