@@ -1,44 +1,224 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Convertir Excel a JSON</title>
-  <link rel="stylesheet" href="estilos.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>convertir excel a json</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: white; 
+    background-color: #1c1c1c; /* fondo oscuro */
+    text-align: center; /* para centrar el contenido */
+  }
+
+  img {
+    max-width: 200px; /* ajusta el tamaño del logo */
+    margin-bottom: 20px; /* espacio debajo del logo */
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .form-container label, 
+  .form-container input {
+    margin-right: 10px;
+  }
+
+  label {
+    color: #ccc; /* gris claro */
+    text-transform: lowercase; /* convierte el texto a minúsculas */
+  }
+
+  input {
+    padding: 10px;
+    background-color: #3a3a3a; /* fondo gris oscuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 180px;
+    text-transform: lowercase; /* convierte el texto a minúsculas */
+  }
+
+  input[type="file"] {
+    margin-bottom: 20px;
+    background-color: #3a3a3a; /* fondo gris oscuro */
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%; /* ajusta el campo al 100% del contenedor */
+    max-width: 260px; /* límite de ancho en pantallas grandes */
+    text-transform: lowercase; /* convierte el texto a minúsculas */
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #444; /* botones gris oscuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-transform: lowercase; /* convierte el texto a minúsculas */
+  }
+
+  button:hover {
+    background-color: #555; /* botón un poco más claro en hover */
+  }
+
+  #output {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #2a2a2a; /* fondo del output gris oscuro */
+    color: white;
+    white-space: pre-wrap;
+    border-radius: 5px;
+    text-align: left; /* output alineado a la izquierda */
+  }
+
+  .json-label {
+    text-transform: uppercase; /* convierte JSON a mayúsculas */
+  }
+
+</style>
 </head>
 <body>
-  <div id="content">
-    <!-- Logo -->
-    <div id="header">
-      <a href="https://www.rhinopay.com">
-        <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="Logo">
-      </a>
+
+  <!-- logo en la parte superior -->
+  <img src="https://www.rhinopay.com/assets/images/1-387x121.png" alt="logo">
+
+  <!-- contenedor de los 4 campos -->
+  <div class="form-container">
+    <div>
+      <label for="inicioPeriodo">inicio del periodo:</label>
+      <input type="text" id="inicioPeriodo" />
     </div>
-
-    <!-- Campos de entrada -->
-    <label for="inicioPeriodo">Inicio del periodo:</label>
-    <input type="text" id="inicioPeriodo" />
-
-    <label for="finPeriodo">Fin del periodo:</label>
-    <input type="text" id="finPeriodo" />
-
-    <label for="claveInstitucion">Clave de institución:</label>
-    <input type="text" id="claveInstitucion" />
-
-    <label for="reporte">Reporte:</label>
-    <input type="text" id="reporte" />
-
-    <!-- Botones -->
-    <div class="buttons-container">
-      <button onclick="mostrarInformacionPorReporte()">Convertir a JSON</button>
-      <button onclick="copyToJson()">Copiar JSON</button>
-      <button onclick="exportToJson()">Exportar JSON</button>
-      <button>Otro Botón</button>
+    <div>
+      <label for="finPeriodo">fin del periodo:</label>
+      <input type="text" id="finPeriodo" />
     </div>
-
-    <!-- Salida (output) -->
-    <div id="output">Aquí se mostrará el JSON...</div>
+    <div>
+      <label for="claveInstitucion">clave de institución:</label>
+      <input type="text" id="claveInstitucion" />
+    </div>
+    <div>
+      <label for="reporte">reporte:</label>
+      <input type="text" id="reporte" />
+    </div>
   </div>
+
+  <!-- botón para elegir archivo -->
+  <input type="file" id="excel-file" />
+  <br>
+
+  <!-- botones para acciones -->
+  <button onclick="mostrarInformacionPorReporte()">convertir a JSON</button>
+  <button onclick="copyToJson()">copiar JSON</button>
+  <button onclick="exportToJson()">exportar JSON</button>
+
+  <!-- área de salida (output) -->
+  <div id="output">output</div>
+
+<script>
+  let jsonData = null;
+  let identificadorReporte = null;
+
+  function convertToJson() {
+    if (identificadorReporte && jsonData) {
+      const datosConEncabezado = {
+        identificadorReporte: identificadorReporte,
+        informacionFinanciera: jsonData
+      };
+
+      const jsonContent = JSON.stringify(datosConEncabezado, null, 2);
+      displayOutput(jsonContent);
+    } else {
+      alert('primero convierte el archivo de excel y captura los campos requeridos.');
+    }
+  }
+
+  function copyToJson() {
+    const outputDiv = document.getElementById('output');
+    const range = document.createRange();
+    range.selectNodeContents(outputDiv);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand('copy');
+    selection.removeAllRanges();
+    alert('JSON copiado al portapapeles. pega el contenido en un archivo de texto para guardarlo como JSON.');
+  }
+
+  function displayOutput(content) {
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerText = content;
+  }
+
+  function mostrarInformacionPorReporte() {
+    const inicioPeriodo = document.getElementById('inicioPeriodo').value;
+    const finPeriodo = document.getElementById('finPeriodo').value;
+    const claveInstitucion = document.getElementById('claveInstitucion').value;
+    const reporte = document.getElementById('reporte').value;
+
+    if (!inicioPeriodo || !finPeriodo || !claveInstitucion || !reporte) {
+      alert('por favor, completa todos los campos requeridos.');
+      return;
+    }
+
+    identificadorReporte = {
+      inicioPeriodo: inicioPeriodo,
+      finPeriodo: finPeriodo,
+      claveInstitucion: claveInstitucion,
+      reporte: reporte
+    };
+
+    const fileInput = document.getElementById('excel-file');
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const data = event.target.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+      convertToJson();
+    };
+
+    reader.readAsBinaryString(file);
+  }
+
+  function exportToJson() {
+    if (identificadorReporte && jsonData) {
+      const datosConEncabezado = {
+        identificadorReporte: identificadorReporte,
+        informacionFinanciera: jsonData
+      };
+
+      const jsonContent = JSON.stringify(datosConEncabezado, null, 2);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
+
+      const fileInput = document.getElementById('excel-file');
+      const fileName = fileInput.files[0].name.replace(/\.[^/.]+$/, "");
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${fileName}.json`; // Aquí está el ajuste
+      a.click();
+      URL.revokeObjectURL(url);
+    } else {
+      alert('primero convierte el archivo de excel y captura los campos requeridos.');
+    }
+  }
+</script>
+
 </body>
 </html>
