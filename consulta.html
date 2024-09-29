@@ -1,30 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<link rel="stylesheet" href="estilos.css"> 
-    <title>Noviembre</title>
+    <!-- metadatos básicos y enlace a la hoja de estilos externa -->
+    <meta charset="UTF-8"> <!-- configuración de codificación de caracteres en utf-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- configuración para hacer la página responsive -->
+    <title>nlp</title> <!-- título que aparece en la pestaña del navegador -->
     
+    <!-- enlace a la hoja de estilos externa (archivo css separado) -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1></h1>
 
-    <label for="valor"></label>
-    <input type="text" id="valor" placeholder="">
-    <button onclick="redirigir()">Generar Estado de Cuenta</button>
+<!-- contenedor principal para centrar el formulario en la página -->
+<div class="container">
+    <!-- formulario donde el usuario ingresará la clave de api y la pregunta -->
+    <form id="formulariochat">
+        <!-- campo para ingresar la clave de api, es de tipo "text" -->
+        <input type="text" id="claveapi" placeholder="api key" required>
+        
+        <!-- área de texto donde el usuario escribirá su pregunta -->
+        <textarea id="pregunta" rows="4" placeholder="escribe tu pregunta aquí..." required></textarea>
+        
+        <!-- botón que envía el formulario, activando el código javascript -->
+        <button type="submit">enviar texto</button>
+    </form>
+    
+    <!-- div donde se mostrará la respuesta de la api de openai -->
+    <div class="respuesta" id="contenedorrespuesta"></div>
+</div>
 
-    <script>
-        function redirigir() {
-            
-            var valorClabe = document.getElementById("valor").value;
-            
-            var enlace = "https://rp-app-01.azurewebsites.net/api/Reporte/GetEstadoCuenta?cuenta=" + valorClabe + "&anio=2023&mes=11";
+<!-- código javascript embebido para manejar la lógica del formulario y la interacción con la api -->
+<script>
+    // agregar un "listener" al formulario para manejar el evento de envío (submit)
+    document.getElementById('formulariochat').addEventListener('submit', async function(event) {
+        event.preventDefault(); // prevenir que el formulario se envíe de forma tradicional y recargue la página
+        
+        // obtener el valor de la clave de api que el usuario ingresó
+        const claveapi = document.getElementById('claveapi').value.trim();
+        // obtener el valor de la pregunta que el usuario ingresó
+        const pregunta = document.getElementById('pregunta').value.trim();
+        // referencia al contenedor donde se mostrará la respuesta
+        const contenedorrespuesta = document.getElementById('contenedorrespuesta');
 
-	    var ultimos6 = valorClabe.toString().substr(-6);
-            
-            window.open(enlace, '_blank');
-
-	   navigator.clipboard.writeText(ultimos6);
+        // verificar que la clave de api y la pregunta no estén vacías
+        if (!claveapi || !pregunta) {
+            // mostrar un mensaje de alerta si alguno de los campos está vacío
+            alert('por favor, ingresa la clave de api y una pregunta.');
+            return; // salir de la función si falta información
         }
-    </script>
+
+        // mientras se espera la respuesta de la api, mostrar "..."
+        contenedorrespuesta.textContent = '...';
+
+        try {
+            // hacer una solicitud a la api de openai usando el método "fetch"
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'post', // enviar los datos usando el método post
+                headers: {
+                    'content-type': 'application/json', // indicar que el contenido es json
+                    'authorization': `bearer ${claveapi}` // incluir la clave de api en el encabezado de autorización
+                },
+                body: JSON.stringify({
+                    model: 'gpt-3.5-turbo', // especificar el modelo de openai a utilizar
+                    messages: [{ role: 'user', content: pregunta }], // la pregunta del usuario
+                    max_tokens: 150, // máximo de tokens que puede devolver la respuesta
+                    temperature: 0.7 // control de creatividad en las respuestas (0 = respuestas más predecibles, 1 = más creatividad)
+                })
+            });
+
+            // si la respuesta no es exitosa (status != 200), mostrar un error
+            if (!response.ok) {
+                const errorData = await response.json(); // convertir la respuesta a json
+                throw new Error(`error ${response.status}: ${errorData.error.message}`); // mostrar el error detallado
+            }
+
+            // convertir la respuesta exitosa a json
+            const data = await response.json();
+            // mostrar la respuesta del modelo directamente en el contenedor de respuestas
+            contenedorrespuesta.textContent = data.choices[0].message.content.trim();
+        } catch (error) {
+            // si ocurre un error, mostrarlo en la consola y en la interfaz
+            console.error('error al realizar la solicitud:', error);
+            contenedorrespuesta.innerHTML = `<strong class="error">error:</strong> ${error.message}`;
+        }
+    });
+</script>
+
 </body>
 </html>
