@@ -1,63 +1,41 @@
-/* reset básico para eliminar márgenes y rellenos por defecto */
-* {
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #1a1e26;
+    padding-top: 20px;
+    color: white;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* estilos generales del body, centrando el contenido */
-body {
-    font-family: arial, sans-serif; /* fuente utilizada */
-    background-color: #1a1a1a; /* fondo oscuro */
-    color: #e0e0e0; /* color de texto claro */
+#form-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* centrar horizontalmente */
-    justify-content: flex-start; /* ajustar la alineación vertical */
-    min-height: 100vh; /* altura mínima de la pantalla */
+    align-items: center;
 }
 
-/* estilo para el contenedor del header */
-#header {
-    width: 100%; /* ocupa el ancho completo */
-    background-color: #2b2b2b; /* fondo oscuro */
-    padding: 20px; /* espaciado interno */
-    text-align: center; /* centrar el logo */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra para el header */
-    border-bottom: 2px solid #444; /* borde inferior */
+button {
+    background-color: #333330;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+    margin: 10px 0; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* estilos para el contenido */
-#content {
-    width: 100%; /* el contenido ocupa el ancho completo */
-    padding: 20px;
-    background-color: #3c3c3c; /* fondo oscuro para el contenido */
-    border-radius: 8px; /* bordes redondeados */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* sombra */
-    flex-grow: 1; /* permite que el contenido crezca según el espacio disponible */
-    margin-top: 20px; /* margen superior */
+button:hover {
+    background-color: #fd7e14;
+    transform: scale(1.1); 
 }
 
-/* estilos para el iframe */
-iframe {
-    width: 100%; /* el iframe ocupa el 100% del ancho */
-    height: 800px; /* altura fija */
-    border: none; /* sin bordes */
-    border-radius: 8px; /* bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* sombra */
-}
-
-/* estilos responsive para pantallas más pequeñas */
-@media (max-width: 600px) {
-    #header {
-        padding: 10px; /* reducir el espaciado en pantallas pequeñas */
-    }
-    
-    #content {
-        padding: 15px;
-    }
-    
-    iframe {
-        height: 600px; /* altura más pequeña en pantallas pequeñas */
-    }
+input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
