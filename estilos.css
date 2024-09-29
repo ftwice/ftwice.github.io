@@ -57,7 +57,7 @@ button:hover {
 }
 
 /* estilo para el contenedor de respuesta */
-.response {
+.respuesta {
     margin-top: 20px; /* separación superior */
     background-color: #3c3c3c; /* fondo oscuro para la respuesta */
     padding: 15px; /* espaciado interno */
