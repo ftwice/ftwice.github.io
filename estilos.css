@@ -1,5 +1,5 @@
 body {
-  background-color: #1c1c1c;
+  background-color: #1c1c1c; /* Puedes cambiar el color de fondo si lo deseas */
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
@@ -13,7 +13,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  width: 450px; /* Ajustado para que el diseño tenga espacio */
   text-align: center;
 }
 
@@ -27,17 +27,18 @@ label {
   color: #ccc;
   font-size: 14px;
   display: block;
+  text-align: left; /* Alinea las etiquetas a la izquierda */
   margin: 10px 0 5px;
 }
 
 input, textarea {
-  width: 100%;
+  width: calc(100% - 10px); /* Permite que los campos se ajusten al 100% */
   padding: 10px;
   margin-bottom: 15px;
   border: none;
   border-radius: 5px;
-  background-color: #3a3a3a;
-  color: #ccc;
+  background-color: #fff; /* Color de fondo de los campos */
+  color: #000; /* Color de texto de los campos */
   font-size: 14px;
 }
 
@@ -46,20 +47,22 @@ input::placeholder, textarea::placeholder {
 }
 
 button {
-  width: 100%;
-  padding: 10px;
-  background-color: #444;
-  color: #eee;
-  border: none;
+  padding: 10px 20px;
+  margin: 5px;
   border-radius: 5px;
+  border: none;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 20px;
 }
 
-button:hover {
-  background-color: #555;
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.buttons-container button {
+  margin: 0 5px; /* Añade un poco de espacio entre los botones */
 }
 
 #output {
