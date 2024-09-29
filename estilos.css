@@ -13,9 +13,21 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
-  width: 100%;
+  width: 300px;
   text-align: center;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+label {
+  color: #ccc;
+  font-size: 14px;
+  display: block;
+  margin: 10px 0 5px;
 }
 
 input, textarea {
@@ -43,6 +55,7 @@ button {
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-bottom: 20px;
 }
 
 button:hover {
@@ -50,9 +63,10 @@ button:hover {
 }
 
 #output {
-  margin-top: 20px;
-  padding: 10px;
+  text-align: left;
   background-color: #333;
+  padding: 10px;
   color: #eee;
   border-radius: 5px;
+  white-space: pre-wrap;
 }
